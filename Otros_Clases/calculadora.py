@@ -71,14 +71,3 @@ bottomframe = Frame(top)
 bottomframe.pack( side = BOTTOM )
 
 top.mainloop()
-
-
-   # text = textbox.get()
-   # textbox.delete(0,END)
-   # text_label.config(text=text)
-
-
-
-
-
-
