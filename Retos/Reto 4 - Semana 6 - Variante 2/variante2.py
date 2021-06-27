@@ -8,46 +8,47 @@
 
 """Inicio espacio para programar funciones propias"""
 #En este espacio podrás programar las funciones que deseas usar en la función solución (ES OPCIONAL
-class Stack: 
-    def __init__(self):
-        self.items = []
-#Metodo para insertar elementos en la pila
-    def push(self,item):
-        self.items.append(item)
+
 
 """Fin espacio para programar funciones propias"""
 
 def actualizar_estado_editor(operaciones_usuario):
     #ESTA ES LA FUNCIÓN A LA QUE LE DEBES GARANTIZAR LOS RETORNOS REQUERIDOS EN EL ENUNCIADO.
-    texto_escrito=Stack() 
+    texto_escrito=[] 
     texto_actual = ""
-    rehacer=Stack()
+    rehacer=[]
     contador=0
     cadena_final=""
+
     for i in operaciones_usuario:
         if i =="DESHACER":
-            rehacer.push(texto_actual)
-            texto_actual = texto_escrito.items.pop()
+            rehacer.append(texto_actual)
+            texto_actual = texto_escrito.pop()
             contador=contador-1
         elif i =="REHACER":
-            texto_escrito.push(texto_actual)
-            texto_actual=rehacer.items.pop()
+            texto_escrito.append(texto_actual)
+            texto_actual=rehacer.pop()
             contador=contador+1
         elif texto_actual=="":
             texto_actual=i        
         else:
-            texto_escrito.push(texto_actual)
+            texto_escrito.append(texto_actual)
             texto_actual=i
             contador=contador +1    
         
+    for i in range(contador):
+        cadena_final+=texto_escrito[i]
+    
+    """
     contador2=contador
-    cadena=Stack()
+    cadena=[]
     while contador>0:        
-        cadena.push(texto_escrito.items.pop())        
+        cadena.append(texto_escrito.pop())        
         contador=contador-1
     while contador2>0:
-        cadena_final+=cadena.items.pop()
+        cadena_final+=cadena.pop()
         contador2=contador2-1
+    """
 
         
     print(cadena_final+texto_actual)
