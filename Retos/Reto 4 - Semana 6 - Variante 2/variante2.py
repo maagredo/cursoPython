@@ -14,6 +14,8 @@
 
 def actualizar_estado_editor(operaciones_usuario):
     #ESTA ES LA FUNCIÓN A LA QUE LE DEBES GARANTIZAR LOS RETORNOS REQUERIDOS EN EL ENUNCIADO.
+    
+    """
     texto_escrito=[] 
     texto_actual = ""
     rehacer=[]
@@ -38,7 +40,7 @@ def actualizar_estado_editor(operaciones_usuario):
         
     for i in range(contador):
         cadena_final+=texto_escrito[i]
-    
+    """
     """
     contador2=contador
     cadena=[]
@@ -49,19 +51,42 @@ def actualizar_estado_editor(operaciones_usuario):
         cadena_final+=cadena.pop()
         contador2=contador2-1
     """
+    
+    texto_escrito = []
+    rehacer = []
+    texto_actual = ""
+    cadena = ""
 
-        
-    print(cadena_final+texto_actual)
+    for i in operaciones_usuario:
+        if i != 'DESHACER' and i != 'REHACER':
+            texto_escrito.append(texto_actual)
+            texto_actual = i
+            rehacer.clear()
+
+        if i == 'DESHACER':
+            rehacer.append(texto_actual)
+            texto_actual = texto_escrito.pop()
+
+        if i == 'REHACER':
+            texto_escrito.append(texto_actual)
+            texto_actual = rehacer.pop()
+    for i in range(len(texto_escrito)):
+        cadena += texto_escrito[i]
+    
+    cadena_final = cadena + texto_actual
+            
+    print(cadena_final)
 
 """
 NO PEDIR DATOS CON LA FUNCIÓN input(), NO COLOCAR CÓDIGO FUERA DE LAS FUNCIONES QUE USTED CREE
 Esta línea de código que sigue, permite probar si su ejercicio es correcto
 Por favor NO ELIMINARLA, NO MODIFICARLA
 """
-
+"""
 operaciones_usuario = ["Definamos qué es una función de Python: ",
 "Una función es ","un arreglo unidimensional de datos",
-"DESHACER", "DESHACER", "REHACER", "un grupo de instrucciones"]
+"DESHACER", "DESHACER", "REHACER",
+"un grupo de instrucciones"]
 
 
-actualizar_estado_editor(operaciones_usuario)
+actualizar_estado_editor(operaciones_usuario)"""
