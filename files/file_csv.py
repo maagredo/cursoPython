@@ -1,17 +1,48 @@
 import csv
 
-with open('example.csv', newline='') as File:
-    reader = csv.reader(File) 
+csvsalida = open("analisis_archivo.csv", 'w', newline='')    
+salida = csv.writer(csvsalida, delimiter='\t')
+header=['Fecha','Mean-Min-Max','Concepto']
+salida.writerow(header)
 
-for row in reader:
-    print(row) 
 
+with open("archivos\FB_2.csv", newline="") as csvfile:
+    reader = csv.DictReader(csvfile, delimiter=",")
+        
+    cadena=""
+    data=[]
+    lowest_mean=0
+    for row in reader:
+        if lowest_mean==0:
+            prom=(float(row['High'])+float(row['Low']))/2     
+            lowest_mean=prom
+            highest_mean=prom
+            date_lowest_mean=row['Date']
+            date_highest_mean=row['Date']
+        else:
+            prom=(float(row['High'])+float(row['Low']))/2     
+        if prom < 239:
+            cadena="MUY BAJO"
+        elif prom >= 239 and prom < 265:
+            cadena="BAJO"
+        elif prom >= 265 and prom < 291:
+            cadena="MEDIO"
+        elif prom >= 291 and prom < 317:
+            cadena="ALTO"
+        else:
+            cadena="MUY ALTO"
 
-import csv
-with open('name.csv') as csvfile:
-    reader = csv.DictReader(csvfile)
-for row in reader:
-      print(row['first_name'], row['last_name'])
+        data=[row['Date'],prom,cadena]
+        salida.writerow(data)
+        if lowest_mean>prom:            
+            date_lowest_mean=row['Date']
+            lowest_mean=prom
+        if highest_mean<prom:
+            highest_mean=prom
+            date_highest_mean=row['Date']
+
+csvfile.close()
+print (date_lowest_mean,str(lowest_mean),date_highest_mean,str(highest_mean))
 
 
 
