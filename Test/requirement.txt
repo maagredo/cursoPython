@@ -1,0 +1,4 @@
+# se instalan todos los requerimientos/librerías necesarias para un proyecto x
+pytest
+pandas
+numpy
